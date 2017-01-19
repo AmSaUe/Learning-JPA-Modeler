@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="com.eshop.cart.model" v="2.6" persistenceUnitName="Cart_PU" sm="false" xs="false" id="_14848209748165" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity xre="false" compositePrimaryKeyClass="CustomerPK" abs="false" class="Customer" visibile="true" minimized="false" rootElement="_14848209748165" id="_1484820993506">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="firstName" id="_14848210747579">
+                <jpa:bv/>
+                <jpa:column name="FNAME" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="lastName" id="_148482108189910">
+                <jpa:bv/>
+                <jpa:column name="LNAME" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+            </jpa:basic>
+            <jpa:one-to-many orp="false" own="true" collection-type="java.util.List" connected-entity-id="_1484821361537" visibile="true" name="productOrders" id="_148482148053719">
+                <jpa:join-column name="CUSTOMER_ID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:one-to-many>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_14848209935226">
+                <jpa:bv/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Customer.findAll">
+            <jpa:query>Select e from Customer e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Customer.findByFirstName">
+            <jpa:query>Select c from Customer c where c.firstName=:firstName</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Customer.findByLastName">
+            <jpa:query>Select c from Customer c where c.lastName=:lastName</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ProductPK" abs="false" class="Product" visibile="true" minimized="false" rootElement="_14848209748165" id="_1484821116846">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="description" id="_148482134590513">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" visibile="true" name="retailprice" id="_148482134614514">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:many-to-many collection-type="java.util.List" connected-entity-id="_1484821361537" connected-attribute-id="_148482153442720" visibile="true" name="productOrders" id="_148482153442821"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_148482111684611">
+                <jpa:bv/>
+                <jpa:column name="ID1" unique="false" nullable="true" insertable="true" updatable="true" length="255" precision="0" scale="0"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Product.findAll">
+            <jpa:query>Select e from Product e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Product.findByDescription">
+            <jpa:query>Select p from Product p where p.description=:description</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Product.findByRetailprice">
+            <jpa:query>Select p from Product p where p.retailprice=:retailprice</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity xre="false" compositePrimaryKeyClass="ProductOrderPK" abs="false" class="ProductOrder" visibile="true" minimized="false" rootElement="_14848209748165" id="_1484821361537">
+        <jpa:ts e="true"/>
+        <jpa:hc e="true"/>
+        <jpa:eq e="true"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" visibile="true" name="amount" id="_148482138041017">
+                <jpa:bv/>
+            </jpa:basic>
+            <jpa:many-to-many own="true" collection-type="java.util.List" connected-entity-id="_1484821116846" connected-attribute-id="_148482153442821" visibile="true" name="products" id="_148482153442720">
+                <jpa:join-table name="PRODUCTORDER_PRODUCT">
+                    <jpa:inverse-join-column name="PRODUCTS_ID1" unique="false" nullable="true" insertable="true" updatable="true"/>
+                </jpa:join-table>
+            </jpa:many-to-many>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_148482136153715">
+                <jpa:bv/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="ProductOrder.findAll">
+            <jpa:query>Select e from ProductOrder e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="ProductOrder.findByAmount">
+            <jpa:query>Select p from ProductOrder p where p.amount=:amount</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="ProductOrder.findByAttribute1">
+            <jpa:query>Select p from ProductOrder p where p.attribute1=:attribute1</jpa:query>
+        </jpa:nq>
+        <jpa:table name="PRO_ORDER"/>
+    </jpa:entity>
+    <jpa:snp e="true" loc="BEFORE_PACKAGE">/**
+ * This file was generated by the JPA Modeler
+ */</jpa:snp>
+    <jpa:c>
+        <db u="jdbc:derby://localhost:1527/db" n="db" p="db" d="org.apache.derby.jdbc.ClientDriver"/>
+    </jpa:c>
+    <jpa:diagram>
+        <plane elementRef="_14848209748165">
+            <shape elementRef="_1484820993506">
+                <Bounds x="93.0" y="103.0" width="152.0" height="147.0"/>
+            </shape>
+            <shape elementRef="_1484821116846">
+                <Bounds x="569.0" y="83.0" width="141.0" height="147.0"/>
+            </shape>
+            <shape elementRef="_1484821361537">
+                <Bounds x="324.0" y="250.0" width="174.0" height="126.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>
